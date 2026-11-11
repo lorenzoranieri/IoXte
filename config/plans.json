@@ -1,0 +1,354 @@
+{
+  "_comment": "Prezzi e pacchetti IoXte. Modifica questo file per cambiare listino, crediti e costi di generazione. I valori iniziali replicano la struttura e gli importi pubblici di Emergent (fonti in EMERGENT_FEATURES.md e nel README). Non sono vincolanti: Lorenzo può decidere i propri prezzi.",
+  "currency": "usd",
+  "currencySymbol": "$",
+  "sources": [
+    {
+      "url": "https://emergent.sh/pricing",
+      "retrieved": "2026-11-11",
+      "notes": "Listino ufficiale Individual: Free $0 / 10 crediti mensili; Standard $20/mese o $17/mese annuale (risparmio $36); Pro $200/mese o $167/mese annuale (risparmio $396) con 100 e 750 crediti rispettivamente. Tab Enterprise: prezzi custom, RBAC, SSO, audit log, VPC."
+    },
+    {
+      "url": "https://help.emergent.sh/plans-the-free-tier",
+      "retrieved": "2026-11-11",
+      "notes": "Free: 10 crediti il primo giorno, niente pubblicazione production né domini custom. Standard/Pro pubblicano su *.host e supportano domini custom. I crediti di abbonamento non si accumulano; le ricariche non scadono."
+    },
+    {
+      "url": "https://help.emergent.sh/managing-credit-usage",
+      "retrieved": "2026-11-11",
+      "notes": "Ricariche: pacchetti da 250 crediti ($50) fino a 10.000+ ($2.000). Pagamenti: Stripe, Razorpay, PagBrasil, Paddle, RevenueCat. Avviso email sotto il 20% dell'allocazione."
+    },
+    {
+      "url": "https://help.emergent.sh/deployment-plan-levels",
+      "retrieved": "2026-11-11",
+      "notes": "Piani di pubblicazione: Starter 50, Launch 125, Grow 225, Scale 450, Elite 1100 crediti/mese. CPU/RAM per fascia documentati nella stessa pagina."
+    },
+    {
+      "url": "https://www.greta.sh/blog/greta-vs-emergent-best-ai-app-builder-for-startups",
+      "retrieved": "2026-11-11",
+      "notes": "Fonte secondaria (verificata da loro il 2026-11-05): Business custom; pubblicazione mobile +10 crediti/mese (10 build iOS/Android), build illimitate +25 crediti/mese. Prezzo implicito ricariche ~$0,20/credito."
+    }
+  ],
+  "notesForOwner": {
+    "pricingCopiedAsStartingPoint": true,
+    "freeCreditsDiscrepancy": "La pagina prezzi Emergent indica «10 free monthly credits»; la help indica «10 credits on your first day». IoXte parte da 10 crediti mensili (come la pricing page). Puoi cambiare monthlyCredits del piano free.",
+    "topupIntermediatesInferred": "Emergent documenta gli estremi 250/$50 e 10.000+/$2.000. I pacchetti intermedi in questo file seguono $0,20/credito (stesso rapporto). Aggiungi o togli pacchetti a piacere.",
+    "stripePriceIdsOptional": "Non servono Price ID pre-creati: il checkout usa price_data da questo file. Se preferisci Price ID di Stripe, compilali nei campi stripePriceId*."
+  },
+  "creditCosts": {
+    "generateNew": 5,
+    "iterate": 2,
+    "planOnly": 1,
+    "tests": 1,
+    "brainstorm": 1,
+    "visualEditBatch": 2,
+    "maxxMultiplier": 2,
+    "agentI2Multiplier": 1.25,
+    "agentI3Multiplier": 1.5,
+    "lowBalancePercent": 20,
+    "niaMessage": 1
+  },
+  "plans": [
+    {
+      "id": "free",
+      "name": "Free",
+      "tagline": "Per esplorare la piattaforma, senza impegno",
+      "monthlyPrice": 0,
+      "annualMonthlyPrice": 0,
+      "annualSavings": 0,
+      "monthlyCredits": 10,
+      "contextWindow": "standard",
+      "support": "community",
+      "stripePriceIdMonthly": "",
+      "stripePriceIdAnnual": "",
+      "features": [
+        "10 crediti al mese",
+        "Accesso ai modelli avanzati",
+        "Chat con l'agente e anteprima nel workspace",
+        "Download del codice HTML",
+        "Supporto community"
+      ],
+      "limits": {
+        "canPublish": false,
+        "canCustomDomain": false,
+        "canMobile": false,
+        "canGithub": false,
+        "canMaxx": false,
+        "canEditSystemPrompt": false,
+        "canCustomAgents": false,
+        "canVisualEdits": true,
+        "prioritySupport": false,
+        "frontendOnlyPublishMaybe": true
+      }
+    },
+    {
+      "id": "standard",
+      "name": "Standard",
+      "tagline": "Per chi costruisce i primi progetti e li pubblica",
+      "monthlyPrice": 20,
+      "annualMonthlyPrice": 17,
+      "annualSavings": 36,
+      "monthlyCredits": 100,
+      "contextWindow": "standard",
+      "support": "standard",
+      "stripePriceIdMonthly": "",
+      "stripePriceIdAnnual": "",
+      "features": [
+        "Tutto del piano Free",
+        "100 crediti al mese",
+        "App web e mobile",
+        "Hosting privato dei progetti",
+        "Pubblicazione in produzione",
+        "Domini personalizzati",
+        "Salvataggio su GitHub",
+        "Duplica (fork) dei lavori"
+      ],
+      "limits": {
+        "canPublish": true,
+        "canCustomDomain": true,
+        "canMobile": true,
+        "canGithub": true,
+        "canMaxx": false,
+        "canEditSystemPrompt": false,
+        "canCustomAgents": false,
+        "canVisualEdits": true,
+        "prioritySupport": false,
+        "frontendOnlyPublishMaybe": true
+      }
+    },
+    {
+      "id": "pro",
+      "name": "Pro",
+      "tagline": "Per prodotti SaaS, agenti custom e lavori complessi",
+      "highlighted": true,
+      "monthlyPrice": 200,
+      "annualMonthlyPrice": 167,
+      "annualSavings": 396,
+      "monthlyCredits": 750,
+      "contextWindow": "1M",
+      "support": "priority",
+      "stripePriceIdMonthly": "",
+      "stripePriceIdAnnual": "",
+      "features": [
+        "Tutto del piano Standard",
+        "750 crediti al mese",
+        "Finestra di contesto da 1M di token",
+        "Pensiero intensivo (modalità Intensiva / Ultra)",
+        "Modifica del system prompt",
+        "Creazione di agenti AI personalizzati",
+        "Prestazioni macchina 2×",
+        "Supporto prioritario"
+      ],
+      "limits": {
+        "canPublish": true,
+        "canCustomDomain": true,
+        "canMobile": true,
+        "canGithub": true,
+        "canMaxx": true,
+        "canEditSystemPrompt": true,
+        "canCustomAgents": true,
+        "canVisualEdits": true,
+        "prioritySupport": true,
+        "performanceMultiplier": 2,
+        "ownMongoMigration": true
+      }
+    },
+    {
+      "id": "business",
+      "name": "Business",
+      "tagline": "Per team che lavorano insieme sullo stesso workspace",
+      "custom": true,
+      "monthlyPrice": null,
+      "annualMonthlyPrice": null,
+      "monthlyCredits": null,
+      "support": "priority",
+      "contact": "sales",
+      "features": [
+        "Tutto del piano Pro",
+        "Controllo accessi basato sui ruoli (RBAC)",
+        "Single sign-on (SSO)",
+        "Workspace condivisi e co-editing",
+        "Limiti crediti personalizzati"
+      ],
+      "limits": {
+        "canPublish": true,
+        "canCustomDomain": true,
+        "canMobile": true,
+        "canGithub": true,
+        "canMaxx": true,
+        "canEditSystemPrompt": true,
+        "canCustomAgents": true,
+        "canVisualEdits": true,
+        "prioritySupport": true,
+        "rbac": true,
+        "sso": true,
+        "sharedWorkspaces": true
+      }
+    },
+    {
+      "id": "enterprise",
+      "name": "Enterprise",
+      "tagline": "Per organizzazioni con requisiti di sicurezza e cloud propri",
+      "custom": true,
+      "monthlyPrice": null,
+      "annualMonthlyPrice": null,
+      "monthlyCredits": null,
+      "support": "sla",
+      "contact": "sales",
+      "features": [
+        "Tutto del piano Business",
+        "Limiti crediti per utente",
+        "Audit log",
+        "Database self-hosted",
+        "Deploy nel tuo cloud (VPC)",
+        "Gruppi utente",
+        "Report utilizzo crediti e analytics",
+        "SLA e supporto prioritario"
+      ],
+      "limits": {
+        "canPublish": true,
+        "canCustomDomain": true,
+        "canMobile": true,
+        "canGithub": true,
+        "canMaxx": true,
+        "canEditSystemPrompt": true,
+        "canCustomAgents": true,
+        "canVisualEdits": true,
+        "prioritySupport": true,
+        "rbac": true,
+        "sso": true,
+        "auditLogs": true,
+        "userCreditLimits": true,
+        "selfHostedDb": true,
+        "vpcDeploy": true,
+        "analyticsDashboard": true,
+        "sla": true
+      }
+    }
+  ],
+  "topups": [
+    {
+      "id": "pack-250",
+      "credits": 250,
+      "price": 50,
+      "stripePriceId": "",
+      "source": "documentato da Emergent"
+    },
+    {
+      "id": "pack-500",
+      "credits": 500,
+      "price": 100,
+      "stripePriceId": "",
+      "source": "intermedio inferito a $0,20/credito"
+    },
+    {
+      "id": "pack-1000",
+      "credits": 1000,
+      "price": 200,
+      "stripePriceId": "",
+      "source": "intermedio inferito a $0,20/credito"
+    },
+    {
+      "id": "pack-2500",
+      "credits": 2500,
+      "price": 500,
+      "stripePriceId": "",
+      "source": "intermedio inferito a $0,20/credito"
+    },
+    {
+      "id": "pack-10000",
+      "credits": 10000,
+      "price": 2000,
+      "stripePriceId": "",
+      "source": "documentato da Emergent (10.000+ / $2.000)"
+    }
+  ],
+  "publishingTiers": [
+    {
+      "id": "starter",
+      "name": "Starter",
+      "creditsPerMonth": 50,
+      "cpu": "0.05 vCPU",
+      "memory": "200 MB",
+      "use": "Prototipi, API a basso traffico, strumenti interni"
+    },
+    {
+      "id": "launch",
+      "name": "Launch",
+      "creditsPerMonth": 125,
+      "cpu": "0.5 vCPU",
+      "memory": "2 GB",
+      "use": "Piccole app in produzione, progetti hobby"
+    },
+    {
+      "id": "grow",
+      "name": "Grow",
+      "creditsPerMonth": 225,
+      "cpu": "1 vCPU",
+      "memory": "4 GB",
+      "use": "App web in produzione, concorrenza moderata"
+    },
+    {
+      "id": "scale",
+      "name": "Scale",
+      "creditsPerMonth": 450,
+      "cpu": "2 vCPU",
+      "memory": "8 GB",
+      "use": "Servizi ad alto traffico, worker in background"
+    },
+    {
+      "id": "elite",
+      "name": "Elite",
+      "creditsPerMonth": 1100,
+      "cpu": "4 vCPU",
+      "memory": "16 GB",
+      "use": "Carichi intensivi, inferenza ML"
+    }
+  ],
+  "mobilePublishing": {
+    "extraCreditsPerMonth": 10,
+    "includedStoreBuildsPerMonth": 10,
+    "unlimitedBuildsExtraCredits": 25,
+    "source": "https://www.greta.sh/blog/greta-vs-emergent-best-ai-app-builder-for-startups (2026-11-05); da confermare sulle pagine ufficiali Emergent"
+  },
+  "paymentProviders": {
+    "stripe": {
+      "wired": true,
+      "env": [
+        "STRIPE_SECRET_KEY",
+        "STRIPE_PUBLISHABLE_KEY",
+        "STRIPE_WEBHOOK_SECRET"
+      ]
+    },
+    "razorpay": {
+      "wired": true,
+      "env": [
+        "RAZORPAY_KEY_ID",
+        "RAZORPAY_KEY_SECRET"
+      ],
+      "status": "in attesa di chiavi"
+    },
+    "pagbrasil": {
+      "wired": true,
+      "env": [
+        "PAGBRASIL_API_KEY"
+      ],
+      "status": "in attesa di chiavi"
+    },
+    "paddle": {
+      "wired": true,
+      "env": [
+        "PADDLE_API_KEY",
+        "PADDLE_VENDOR_ID"
+      ],
+      "status": "in attesa di chiavi"
+    },
+    "revenuecat": {
+      "wired": true,
+      "env": [
+        "REVENUECAT_API_KEY"
+      ],
+      "status": "in attesa di chiavi"
+    }
+  }
+}
